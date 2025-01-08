@@ -1,40 +1,43 @@
-const express = require("express");
-const morgan = require("morgan");
-const handlebars = require("express-handlebars");
-const cors = require("cors");
-const path = require("path");
+const express = require('express');
+const morgan = require('morgan');
+const handlebars = require('express-handlebars');
+const cors = require('cors');
+const path = require('path');
 const app = express();
 const port = 3001;
+const route = require('./routes');
 
 // Static file
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Midleware RQ
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+);
+app.use(express.json());
 
 // HTTP logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 // Template engine
-app.engine('.hbs', handlebars.engine({
-    extname:'.hbs'
-}));
+app.engine(
+    '.hbs',handlebars.engine({
+        extname: '.hbs',
+    }),
+);
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname,'resources/views'));
-console.log(path.join(__dirname,'resources/views'));
+app.set('views', path.join(__dirname, 'resources/views'));
+console.log(path.join(__dirname, 'resources/views'));
 
 // Midleware API
 app.use(cors());
 
-// Create API test
-app.get("/", (req,res) => {
-    res.render('test');
-});
+// Routes init
+route(app);
 
-app.get("/api/home", (req,res) => {
-    res.json({
-        message: `Server started in port ${port} by Tran Quoc Phuong`,
-        users: ["Tran","Quoc","Phuong"]
-    });
-});
-
-app.listen(port, () => {
-    console.log(`Server started in port ${port}`);
-});
+// Listen port
+                app.listen(port, () => {
+                    console.log(`Server started in port ${port}`);
+                });

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "nodemon --inspect src/index.js",
     "watch": "sass --watch src/resources/scss:src/public/css",
-    "dev": "nodemon --inspect src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test2": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +17,15 @@
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1"
   },
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
     "sass": "^1.83.0"
   }
 }
