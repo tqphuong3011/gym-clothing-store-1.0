@@ -1,11 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
-const handlebars = require('express-handlebars');
+const expressHBS = require('express-handlebars');
 const cors = require('cors');
 const path = require('path');
+
+const route = require('./routes');
+const db = require('./config/db');
+
+// Connect to DB
+db.connect();
+
 const app = express();
 const port = 3001;
-const route = require('./routes');
 
 // Static file
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,13 +29,14 @@ app.use(express.json());
 
 // Template engine
 app.engine(
-    '.hbs',handlebars.engine({
+    '.hbs',
+    expressHBS.engine({
         extname: '.hbs',
     }),
 );
-                app.set('view engine', '.hbs');
-                app.set('views', path.join(__dirname, 'resources/views'));
-                console.log(path.join(__dirname, 'resources/views'));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'resources', 'views'));
+console.log(path.join(__dirname, 'resources/views'));
 
 // Midleware API
 app.use(cors());
@@ -38,6 +45,6 @@ app.use(cors());
 route(app);
 
 // Listen port
-                app.listen(port, () => {
-                    console.log(`Server started in port ${port}`);
-                });
+app.listen(port, () => {
+    console.log(`Server started in port ${port}`);
+});

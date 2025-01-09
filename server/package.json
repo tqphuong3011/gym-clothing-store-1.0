@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
+    "format": "lint-staged",
     "start": "nodemon --inspect src/index.js",
     "watch": "sass --watch src/resources/scss:src/public/css",
     "test2": "node src/index.js",
@@ -14,7 +15,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "express-handlebars": "^8.0.1"
+    "express-handlebars": "^8.0.1",
+    "mongoose": "^8.9.3"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
