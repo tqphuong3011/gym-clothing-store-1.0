@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
+const slug = require('mongoose-slug-updater');
+mongoose.plugin(slug);
 const Schema = mongoose.Schema;
 
 // Define Product schema
 const ProductSchema = new Schema(
     {
-        productID: { type: String, required: true, unique: true },
-        name: { type: String, required: true, maxLength: 100 },
-        category: { type: String, required: true, maxLength: 100 },
-        price: { type: Number, required: true },
-        brand: { type: String, required: true },
-        description: { type: String, required: false, maxLength: 600 },
-        images: { type: [String], required: false },
+        productID: { type: String, unique: true },
+        name: { type: String, maxLength: 100 },
+        category: { type: String, maxLength: 100 },
+        price: { type: Number },
+        brand: { type: String },
+        description: { type: String, maxLength: 600 },
+        images: { type: [String] },
+        slug: { type: String, slug: 'name', unique: true },
     },
     {
-        timestamps: true, // Automatically add createdAt and updatedAt fields
+        timestamps: true,
     },
 );
 

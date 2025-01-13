@@ -1,0 +1,45 @@
+<div class="container mt-4">
+     <form method="POST" action="/products/manage/store">
+          <div class="form-group mb-3">
+               <label for="productID">Product ID</label>
+               <input name="productID" type="text" class="form-control" id="productID" required>
+          </div>
+          
+          <div class="form-group mb-3">
+               <label for="name">Product Name</label>
+               <input name="name" type="text" class="form-control" id="name" maxlength="100" required>
+          </div>
+
+          <div class="form-group mb-3">
+               <label for="category">Category</label>
+               <input name="category" type="text" class="form-control" id="category" maxlength="100" required>
+          </div>
+
+          <div class="form-group mb-3">
+               <label for="price">Price</label>
+               <input name="price" type="number" class="form-control" id="price" required>
+          </div>
+
+          <div class="form-group mb-3">
+               <label for="brand">Brand</label>
+               <input name="brand" type="text" class="form-control" id="brand" maxlength="100" required>
+          </div>
+
+          <div class="form-group mb-3">
+               <label for="description">Description</label>
+               <textarea name="description" class="form-control" id="description" maxlength="600" rows="3"></textarea>
+          </div>
+
+          <div class="form-group mb-3">
+               <label for="images">Images</label>
+               <input name="images" type="text" class="form-control" id="images" maxlength="100" required>
+          </div>
+
+          {{!-- <div class="form-group mb-3">
+               <label for="images">Images</label>
+               <input name="images" type="file" class="form-control" id="images" multiple accept="image/*">
+          </div> --}}
+
+          <button type="submit" class="btn btn-primary">Create Product</button>
+     </form>
+</div>
